@@ -1,0 +1,16 @@
+Step 1: Clone this repository
+Step 2: Install the emscripten compiler. emscripten will take the place of gcc.
+Step 3: Compile main.c using this command:
+    emcc main.c -s USE_SDL=2 -O3 -s WASM=1 -o main.js
+
+Notes:
+- USE_SDL=2 allows us to make use of the C SDL library, which can interact with a canvas directly.
+- -O3 is maximum optimisation. Drop it if you want faster compile times.
+- To the best of my knowledge, WASM=1 is now redundant, with WASM being the default over asm.js for a while now. But I am not yet confident enough to omit this.
+- main.js will be an emscripten js wrapper around the wasm.
+
+Step 4: Launch a webserver. The browser will not directly load wasm if it is not being served.
+The easiest is python. For 3.8, simply type this into the terminal:
+    python -m http.server 8080
+For earlier versions of Python (including typical 2.7 system python), there is a similar command.
+Step 5: Open home.html in the browser by navigating to the serving IP and port.
